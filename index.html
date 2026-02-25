@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专业五子棋（在线对战版）</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>专业五子棋</h1>
+        <div class="status" id="status">请选择游戏模式与规则</div>
+
+        <!-- 模式选择面板（核心：确保在线对战按钮存在） -->
+        <div class="panel">
+            <button class="mode-btn" data-mode="two">双人对战（本地）</button>
+            <button class="mode-btn" data-mode="ai">人机对战</button>
+            <button class="mode-btn" data-mode="online">在线对战</button>
+        </div>
+
+        <!-- 在线对战面板（核心：确保这个面板完整） -->
+        <div class="panel" id="onlinePanel" style="display:none; border:1px solid #eee; padding:10px; border-radius:5px; margin:10px 0;">
+            <div class="online-info" style="margin-bottom:10px;">
+                <span>房间ID：</span>
+                <input type="text" id="roomId" placeholder="输入房间ID加入" readonly style="padding:5px; width:120px; margin:0 5px;">
+                <button id="createRoomBtn" style="padding:5px 10px; margin:0 2px;">创建房间</button>
+                <button id="joinRoomBtn" style="padding:5px 10px; margin:0 2px;">加入房间</button>
+                <button id="readyBtn" disabled style="padding:5px 10px; margin:0 2px; background:#ccc; cursor:not-allowed;">准备开始</button>
+            </div>
+            <div class="player-info" style="font-size:14px; color:#666;">
+                <div style="margin-right:20px;">玩家1（黑棋）：<span id="player1">未连接</span></div>
+                <div>玩家2（白棋）：<span id="player2">未连接</span></div>
+            </div>
+        </div>
+
+        <!-- 难度选择面板 -->
+        <div class="panel" id="difficultyPanel" style="display:none;">
+            <button class="diff-btn" data-diff="easy">简单</button>
+            <button class="diff-btn" data-diff="medium">中等</button>
+            <button class="diff-btn" data-diff="hard">困难</button>
+        </div>
+
+        <!-- 规则选择面板 -->
+        <div class="panel">
+            <button class="rule-btn" data-rule="normal">普通规则</button>
+            <button class="rule-btn" data-rule="professional">禁手规则</button>
+        </div>
+
+        <!-- 皮肤选择面板 -->
+        <div class="panel">
+            <span>棋盘皮肤：</span>
+            <button class="skin-btn" data-skin="wood">原木色</button>
+            <button class="skin-btn" data-skin="green">绿色</button>
+            <button class="skin-btn" data-skin="blue">蓝色</button>
+        </div>
+
+        <!-- 棋盘容器（包含预览棋子） -->
+        <div class="board-wrapper" id="boardWrapper">
+            <div id="chessboard" class="skin-wood"></div>
+            <!-- 预览棋子（跟随鼠标） -->
+            <div id="previewPiece" class="chess-piece black" style="display:none;"></div>
+        </div>
+
+        <!-- 控制按钮 -->
+        <div class="controls">
+            <button id="restartBtn" disabled>重新开始</button>
+            <button id="undoBtn" disabled>悔棋</button>
+            <button id="leaveRoomBtn" disabled>离开房间</button>
+        </div>
+
+        <!-- 提示信息 -->
+        <div class="tip" id="tip">禁手规则：黑棋禁止三三/四四/长连，禁手点落子判负 | 在线对战需先启动WebSocket服务器</div>
+    </div>
+
+    <!-- 引入脚本 -->
+    <script src="script.js"></script>
+</body>
+</html>
